@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Madeline Smith</title>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,14 +38,51 @@
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
+        canvas {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
     <div>
         <h1>Madeline Smith</h1>
-        <button type="button" onclick="window.open('portfolio.pdf')">View Portfolio</button>
+        <button type="button" onclick="loadPortfolio()">View Portfolio</button>
+        <canvas id="pdfCanvas"></canvas>
     </div>
+
+    <script type="text/javascript">
+        // Configure workerSrc
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+
+        function loadPortfolio() {
+            // Load the PDF
+            var loadingTask = pdfjsLib.getDocument('portfolio.pdf');
+            loadingTask.promise.then(function(pdf) {
+                // Fetch the first page
+                return pdf.getPage(1).then(function(page) {
+                    var scale = 1.5;
+                    var viewport = page.getViewport({ scale: scale });
+
+                    // Prepare canvas
+                    var canvas = document.getElementById('pdfCanvas');
+                    var context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    // Render PDF page
+                    var renderContext = {
+                        canvasContext: context,
+                        viewport: viewport,
+                    };
+                    var renderTask = page.render(renderContext);
+                    return renderTask.promise;
+                });
+            }).catch(function(reason) {
+                console.error(reason);
+            });
+        }
+    </script>
 
 </body>
 </html>
