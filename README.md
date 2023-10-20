@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Hello, this is Garrett. I've created this Portfolio Viewer for Madeline Smith. The purpose of this project is to showcase Madeline's exceptional work in a user-friendly and efficient manner. Using a combination of HTML, CSS, and JavaScript powered by PDF.js, this simple yet effective web interface loads her portfolio quickly and elegantly.
+Hello, this is Garrett. I've created this Portfolio Viewer for Madeline. The purpose of this project is to showcase Madeline's exceptional work in a user-friendly and efficient manner. Using a combination of HTML, CSS, and JavaScript powered by PDF.js, this simple yet effective web interface loads her portfolio quickly and elegantly.
 
 ## Features
 
