@@ -2,12 +2,10 @@
 <html>
 <head>
     <title>Madeline Smith</title>
-    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Eczar&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Eczar&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Eczar&family=Libre+Franklin&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Libre Franklin", Arial, sans-serif;
             background-color: #fff8ad;
             color: #1d4930;
             margin: 0;
@@ -16,22 +14,23 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            font-family: "
         }
         h1 {
-            font-size: 2.5rem;
+            font-size: 4.5rem;
             margin-bottom: 20px;
+            font-family: "Eczar";
         }
         button {
-            background-color: #555;
-            color: #fff;
             border: none;
             padding: 15px 30px;
             font-size: 1rem;
             cursor: pointer;
+            text-decoration:underline;
             transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #333;
+            color: #333;
         }
         div {
             text-align: center;
@@ -56,32 +55,11 @@
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 
         function loadPortfolio() {
-            // Load the PDF
-            var loadingTask = pdfjsLib.getDocument('portfolio.pdf');
-            loadingTask.promise.then(function(pdf) {
-                // Fetch the first page
-                return pdf.getPage(1).then(function(page) {
-                    var scale = 1.5;
-                    var viewport = page.getViewport({ scale: scale });
+  var pdfPath = 'portfolio.pdf';
+  var viewerPath = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/viewer.html';
+  window.open(viewerPath + '?file=' + encodeURIComponent(pdfPath), '_blank');
+}
 
-                    // Prepare canvas
-                    var canvas = document.getElementById('pdfCanvas');
-                    var context = canvas.getContext('2d');
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    // Render PDF page
-                    var renderContext = {
-                        canvasContext: context,
-                        viewport: viewport,
-                    };
-                    var renderTask = page.render(renderContext);
-                    return renderTask.promise;
-                });
-            }).catch(function(reason) {
-                console.error(reason);
-            });
-        }
     </script>
 
 </body>
